@@ -1,2 +1,4 @@
 *.ll
 *.out
+*.dot
+*.dot.*
