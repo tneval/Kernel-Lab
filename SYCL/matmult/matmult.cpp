@@ -2,12 +2,12 @@
 #include <iostream>
 #include <vector>
 
-constexpr size_t TILE_SIZE = 4;
+constexpr size_t TILE_SIZE = 2;
 
 class MatrixMultiplication;
 
 int main() {
-    constexpr size_t N = 16; // Matrix size N x N
+    constexpr size_t N = 8; // Matrix size N x N
 
     // Initialize host matrices
     std::vector<float> A(N * N, 1.0f); // Fill with 1.0 for simplicity
@@ -82,7 +82,7 @@ int main() {
     for (size_t i = 0; i < N; ++i) {
         for (size_t j = 0; j < N; ++j) {
             if (C[i * N + j] != 2.0f * N) {
-                //std::cout << "Mismatch at (" << i << ", " << j << "): " << C[i * N + j] << "\n";
+                std::cout << "Mismatch at (" << i << ", " << j << "): " << C[i * N + j] << "\n";
                 //return -1;
                 
             }
