@@ -2,12 +2,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define GLOBAL_SIZE_X 2
-#define GLOBAL_SIZE_Y 2
-#define GLOBAL_SIZE_Z 10
-#define LOCAL_SIZE_X 2
-#define LOCAL_SIZE_Y 2
-#define LOCAL_SIZE_Z 1
+#define GLOBAL_SIZE_X 4
+#define GLOBAL_SIZE_Y 4
+#define GLOBAL_SIZE_Z 4
+#define LOCAL_SIZE_X 4
+#define LOCAL_SIZE_Y 4
+#define LOCAL_SIZE_Z 4
 
 int main() {
     // Platform and device setup
@@ -55,7 +55,7 @@ int main() {
     }
 
     // Create kernel
-    kernel = clCreateKernel(program, "test_subgroup_size_3d", NULL);
+    kernel = clCreateKernel(program, "test", NULL);
 
     // Enqueue kernel
     clEnqueueNDRangeKernel(queue, kernel, 3, NULL, global_size, local_size, 0, NULL, NULL);

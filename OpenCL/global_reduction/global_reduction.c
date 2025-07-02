@@ -3,8 +3,8 @@
 #include <stdlib.h>
 
 
-#define GLOBAL_SIZE 32
-#define LOCAL_SIZE 16
+#define GLOBAL_SIZE 16
+#define LOCAL_SIZE 4
 
 
 // Helper macro for error checking
@@ -71,9 +71,24 @@ int main() {
         exit(EXIT_FAILURE);
     }
 
+    float reduction_array[GLOBAL_SIZE/LOCAL_SIZE];
+
+    float input_array[GLOBAL_SIZE];
+    for(int i = 0; i< GLOBAL_SIZE; i++){
+        input_array[i] = i%LOCAL_SIZE;
+        printf("i: %d\t %f\n",i, input_array[i]);
+    }
+
+    cl_mem input_buffer = clCreateBuffer(context, CL_MEM_READ_ONLY, sizeof(float)*GLOBAL_SIZE, input_array, &err);
+    cl_mem buffer = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, sizeof(float) * (GLOBAL_SIZE/LOCAL_SIZE), reduction_array, &err);
+    
+
     // Create kernel
-    cl_kernel kernel = clCreateKernel(program, "test_ids", &err);
+    cl_kernel kernel = clCreateKernel(program, "global_reduction", &err);
     CHECK_CL_ERROR(err, "Failed to create kernel");
+
+    clSetKernelArg(kernel, 0, sizeof(cl_mem),&buffer);
+    clSetKernelArg(kernel, 1, sizeof(cl_mem), &buffer);
 
     // Define ND-range
     size_t globalSize = GLOBAL_SIZE; // Total number of work-items
@@ -85,6 +100,15 @@ int main() {
 
     // Finish the queue
     clFinish(queue);
+
+
+
+    clEnqueueReadBuffer(queue, buffer, CL_TRUE, 0, sizeof(float) * (GLOBAL_SIZE/LOCAL_SIZE), reduction_array, 0, NULL, NULL);
+
+    for(int i = 0; i< GLOBAL_SIZE/LOCAL_SIZE; i++){
+        printf("wg %d: val: %f\n",i,reduction_array[i]);
+    }
+
 
     // Cleanup
     clReleaseKernel(kernel);

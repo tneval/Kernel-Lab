@@ -4,7 +4,7 @@
 
 
 #define GLOBAL_SIZE 16
-#define LOCAL_SIZE 4
+#define LOCAL_SIZE 16
 
 
 // Helper macro for error checking

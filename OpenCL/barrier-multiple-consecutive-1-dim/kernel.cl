@@ -1,6 +1,6 @@
 #define SUB_GROUP_SIZE 2
 
-__attribute__((intel_reqd_sub_group_size(SUB_GROUP_SIZE)))
+//__attribute__((intel_reqd_sub_group_size(SUB_GROUP_SIZE)))
 __kernel void test_ids() {
     // Get global and local IDs
     int global_id = get_global_id(0);

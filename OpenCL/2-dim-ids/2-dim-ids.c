@@ -2,10 +2,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define GLOBAL_SIZE_X 8
-#define GLOBAL_SIZE_Y 4
-#define LOCAL_SIZE_X 4
-#define LOCAL_SIZE_Y 2
+#define GLOBAL_SIZE_X 1
+#define GLOBAL_SIZE_Y 1013
+#define LOCAL_SIZE_X 1
+#define LOCAL_SIZE_Y 1013
+
 
 int main() {
     // Platform and device setup

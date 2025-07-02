@@ -9,11 +9,13 @@ __kernel void test_ids_3d() {
     int local_id_x = get_local_id(0);
     int local_id_y = get_local_id(1);
     int local_id_z = get_local_id(2);
-    int sg_id = get_sub_group_id();
+    //int sg_id = get_sub_group_id();
+    int sg_id = 1;
     int wg_id_x = get_group_id(0);
     int wg_id_y = get_group_id(1);
     int wg_id_z = get_group_id(2);
-    int sg_local_id = get_sub_group_local_id();
+    //int sg_local_id = get_sub_group_local_id();
+    int sg_local_id = 1;
 
     // Print the IDs
     printf("B1: Global ID: (%d, %d, %d), Local ID: (%d, %d, %d), Workgroup ID: (%d,%d,%d), Subgroup ID: %d\tSubgroup local ID: %d\n", global_id_x, global_id_y, global_id_z, local_id_x, local_id_y, local_id_z, wg_id_x, wg_id_y, wg_id_z, sg_id, sg_local_id);
